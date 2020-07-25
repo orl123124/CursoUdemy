@@ -1,0 +1,20 @@
+<TabView androidTabsPosition="bottom" androidSelectedTabHighlightColor="#7c015d"
+selectedTabTextColor="#7c015d"
+*ngIf="!isLoading"
+>
+    <!--  
+  <StackLayout *tabItem="{ title:'Today' }">
+        <Label text="Tab 1"></Label>
+    </StackLayout>
+    <StackLayout *tabItem="{ title:'Current Challenge' }">
+        <Label text="Tab 2" ></Label>
+    </StackLayout>
+
+    -->
+    <page-router-outlet  *tabItem="{ title:'Today', iconSource:'res://check' }" name="today"></page-router-outlet>
+    <page-router-outlet  *tabItem="{ title:'Current Challenge', iconSource:'res://trophy'  }" name="current_Challenge"></page-router-outlet>
+  
+</TabView>
+<FlexboxLayout *ngIf="isLoading" >
+    <ActivityIndicator [busy]="isLoading" ></ActivityIndicator>
+</FlexboxLayout>

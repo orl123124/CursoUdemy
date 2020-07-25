@@ -1,0 +1,20 @@
+<app-action-bar title="Today's Challenge.!" [showBackButton]="true"></app-action-bar>
+
+
+<FlexboxLayout *ngIf="!currentDay">
+    <Label text="No challenge found!" class="h1 m-5 text-center"></Label>
+    <Button text="Create new Challenge!" class="-primary"  nsRouterLink="/challenges/replace"  pageTransition="slideLeft" ></Button>
+</FlexboxLayout>
+
+<FlexboxLayout *ngIf="currentDay">
+  <Label class="h1" [text]="currentDay.date | date"></Label>
+    <app-challenge-action
+    (actionSelect)="onHandleInput($event)"
+    cancelText="Cancelar acción"
+    [chosen]="getActionName()"
+    [startDone]="getActionName() === 'completed' || getActionName() === 'faild'  "
+    ></app-challenge-action> 
+</FlexboxLayout>
+
+
+ 

@@ -1,0 +1,23 @@
+Label {
+    width: 50;
+    height: 50;
+}
+
+#L1 {
+    background: red;
+}
+
+#L2 {
+    background: blue;
+}
+
+#L3 {
+    background: orange;
+}
+
+StackLayout {
+    border-width: 5;
+    border-color: rebeccapurple;
+    padding: 10;
+    height: 300;
+}

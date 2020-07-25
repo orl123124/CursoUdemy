@@ -1,0 +1,32 @@
+<!-- https://docs.nativescript.org/angular/core-concepts/angular-navigation.html#page-router-outlet 
+ 
+<StackLayout>
+
+    <app-current-challenge></app-current-challenge>
+
+</StackLayout>
+
+
+<page-router-outlet></page-router-outlet>
+
+  <app-flexbox></app-flexbox>
+   <app-grid></app-grid>
+      <app-absolute></app-absolute>
+
+
+      <FlexboxLayout flexDirection="column">
+    <app-challenge-edit (input)="onChallengeInput($event)"></app-challenge-edit>
+    <app-current-challenge [Challenges]="ActiveChallenge"></app-current-challenge>
+</FlexboxLayout>
+-->
+
+
+
+<RadSideDrawer >
+<FlexboxLayout tkDrawerContent class="drawer-container"> 
+    <Button class="-primary -rounded-lg" text="Logout"  (tap)="onLogOut()"   nsRouterLink="/" [clearHistory]="true" ></Button>
+</FlexboxLayout>
+<StackLayout tkMainContent>
+        <page-router-outlet></page-router-outlet>
+</StackLayout>
+</RadSideDrawer>

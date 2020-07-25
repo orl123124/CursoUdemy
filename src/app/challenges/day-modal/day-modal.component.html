@@ -1,0 +1,8 @@
+ 
+<FlexboxLayout>
+    <Label class="h1" [text]=" loadDate | date "></Label>
+    <app-challenge-action
+    (actionSelect)="onHandleInput($event)"
+    [chosen]="loadStatus">
+    </app-challenge-action> 
+</FlexboxLayout>

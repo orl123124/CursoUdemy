@@ -1,0 +1,86 @@
+<!--
+<GridLayout rows="auto,*" columns="2*,*">
+        <Label class="title" [text]="currentChallenge" row="1" column="0" colSpan="2"></Label>
+
+</GridLayout>
+-->
+
+<!-- 
+<ScrollView>
+    <StackLayout>
+        <Label class="title" [text]="challenge" *ngFor="let challenge of Challenges"></Label>
+    </StackLayout>
+</ScrollView>
+
+
+
+<ListView [items]="Challenges" (itemTap)="onItemTap($event)" iosEstimatedRowHeight="65">
+    <ng-template let-challenge="item" let-i="index">
+        <GridLayout rows="40,20" columns="50,*">
+            <Label row="0" col="0" rowSpan="2" [text]="i"></Label>
+            <Label row="0" col="1" [text]="challenge"></Label>
+            <Label row="1" col="1" text="row 2"></Label>
+        </GridLayout>
+    </ng-template>
+</ListView>
+-->
+
+
+<app-action-bar title="Current challenge !" [showBackButton]="false">
+    <ActionItem 
+    ios.position="right" 
+    android.position="actionBar"
+    nsRouterLink="/challenges/replace"
+    pageTransition="slideLeft">
+        <Label text="&#xf067;" ios:class="fas p-5" android:class="fas p-10"android:fontSize="25"></Label>
+        
+    </ActionItem>
+    <ActionItem 
+    *ngIf="currentChallenge"
+    ios.position="right" 
+    android.position="actionBar"
+    nsRouterLink="/challenges/edit"
+    pageTransition="slideLeft">
+        <Label text="&#xf044;"  ios:class="fas p-5" android:class="fas p-10" android:fontSize="25"></Label>
+    </ActionItem>
+</app-action-bar>
+
+<ScrollView>
+    
+
+<FlexboxLayout class="page">
+    <StackLayout *ngIf="!currentChallenge">
+        <Label text="No challenge found!" class="h1 m-5 text-center"></Label>
+        <Button text="Create new Challenge!" class="-primary"  nsRouterLink="/challenges/replace"  pageTransition="slideLeft" ></Button>
+    </StackLayout>
+    <StackLayout *ngIf="currentChallenge">
+    <Label class="h1 text-center" [text]="currentChallenge.title"></Label>
+    <Label class="body  text-center" [text]="currentChallenge.description"></Label>
+    </StackLayout>
+    
+    <GridLayout rows="auto,*,*,*,*,*,*" columns="*,*,*,*,*,*,*" *ngIf="currentChallenge" >
+        <Label class="text-center week-day-label" *ngFor="let weekday of WeekDays; let i = index" 
+        [text]="weekday"
+        row="0"
+        [col]="i"></Label>
+        
+          <Label 
+            class="text-center day  " 
+            *ngFor="let day of currentChallenge.days; let i = index" 
+            [ngClass]="{'not-setteable': !getDayIsSettable(day.dayInMonth), 'completed': day.status === 1 ,'faild': day.status === 2 }"
+            (tap)="onChangeStatus(day)"
+            
+            [row]="getRow(i,day)"
+            [col]="day.dayInWeek"
+            [text]="day.dayInMonth" >
+        </Label>  
+    
+
+      
+
+    </GridLayout>
+</FlexboxLayout>
+
+
+</ScrollView>
+ 

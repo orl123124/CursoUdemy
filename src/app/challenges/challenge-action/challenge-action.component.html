@@ -1,0 +1,24 @@
+
+  
+    <FlexboxLayout>
+        <Button class="btn-completed -rounded-lg " text="Completed." 
+        (tap)="onAction('completed')"
+        *ngIf=" action !== 'completed' "
+        [isEnabled]="!done"
+        ></Button>
+        <FlexboxLayout class="btn-completed   btn-alt"  *ngIf=" action === 'completed' ">
+            <Label text="&#xf058;" class="fas   animation-btn " ></Label>
+        </FlexboxLayout>
+
+        <Button class="btn-faild -rounded-lg" text="Faild"   
+        (tap)="onAction('faild')"
+        *ngIf=" action !== 'faild' " 
+        [isEnabled]="!done"></Button>
+        <FlexboxLayout class="btn-faild  btn-alt"  *ngIf=" action === 'faild' ">
+            <Label text="&#xf00d;" class="fas  animation-btn  " ></Label>
+        </FlexboxLayout>
+
+        <Button class="btn-default -rounded-lg" [text]="cancelText" (tap)="onAction('reset')"
+        [isEnabled]="!done"></Button>        
+    </FlexboxLayout>
+  

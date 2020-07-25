@@ -1,0 +1,60 @@
+@import "../../../themeColor/theme.scss";
+
+FlexboxLayout{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.btn-alt{
+    width: 70%;
+   /*  text-align: center;
+    justify-content: center; */
+    font-size: 25;
+    border-radius: 40;  
+    height: 60;
+    margin: 7;
+}
+
+button {
+    width: 70%;
+    height: 60;
+}
+
+
+
+.btn-completed {
+    background-color:$success;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-faild {
+    background-color: $faild;
+    color: white;
+    font-weight: bold;
+}
+
+.btn-default {
+    background-color: $default;
+    color: black;
+    font-weight: bold;
+    border-color: silver;
+    border-width: 1;
+}
+
+.animation-btn {
+    animation-name: slide-up;
+    animation-iteration-count: 1;
+    animation-duration: 0.8s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes slide-up{
+    from {
+        transform: translateY(40);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+ 

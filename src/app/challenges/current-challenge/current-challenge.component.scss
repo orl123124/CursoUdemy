@@ -1,0 +1,50 @@
+ @import '../../../themeColor/theme.scss';
+
+.title {
+    font-size: 25;
+    text-align: center;
+    color: purple;
+    font-weight: bold;
+}
+
+Label {
+    align-self:center;
+}
+
+ .page {
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     margin: 20;
+ }
+.week-day-label {
+    font-weight: bold;
+    color: $primary;
+    margin: 15 0;
+}
+ .day {
+     
+     
+     width: 50;
+     height: 50;
+     border-color: $primary;
+     border-width: 1;
+     border-radius: 50%;
+     margin: 10;
+
+ }
+
+ .completed {
+     background: $success;
+     color:white;
+ }
+
+ .faild {
+    background: $faild;
+    color:white;
+}
+
+.not-setteable {
+    background: $default;
+    color:black;
+}

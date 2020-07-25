@@ -1,0 +1,58 @@
+<!--
+<TextField hint="Title Challenge" [(ngModel)]="challengeDescription" row="0" column="0" class="form-control">
+</TextField>
+<Button class="btn" (tap)="onSetChallenge()" text="Set Challenge!" row="0" column="1"></Button>
+
+-->
+<app-action-bar [title]="isCreated ? 'Replace Challenge':'Edit Challenge' " [hasMenu]="false"></app-action-bar>
+<FlexboxLayout    >
+
+    <!--
+    <TextField hint="Title Challenge" [(ngModel)]="challengeDescription" class="form-control">
+    </TextField>
+    <Button class="btn" (tap)="onSetChallenge()" text="Add Challenge!"></Button>
+
+-->
+<StackLayout class="nt-form">
+   
+
+    <StackLayout class="nt-input">
+        <Label text="Title" class="font-weight-bold m-b-5" [ngClass]="{ invalid: !titleCtrl.valid && titleCtrl.touched }"></Label>
+        <TextField hint="Title" required returnKeyType="next"  [(ngModel)]="title"     #titleCtrl="ngModel"></TextField>
+        <Label *ngIf="!titleCtrl.valid && titleCtrl.touched" text="please enter a valid title!"></Label>
+    </StackLayout>
+    <StackLayout class="nt-input" > 
+        <Label text="Description" class="font-weight-bold m-b-5"  [ngClass]="{ invalid: !DescriptionCtrl.valid && DescriptionCtrl.touched }"></Label>
+        <TextView hint="Description" required returnKeyType="done" [(ngModel)]="description"    #DescriptionCtrl="ngModel"></TextView>
+        <Label *ngIf="!DescriptionCtrl.valid && DescriptionCtrl.touched" text="please enter a valid description!"></Label>
+    </StackLayout>
+
+  <!-- Option 2: An input with a label on top, and a bottom border
+  <StackLayout class="nt-input">
+    <Label text="Title" class="font-weight-bold m-b-5" ></Label>
+    <TextField hint="Title"></TextField>
+</StackLayout>
+
+ 
+<GridLayout class="nt-input -sides" rows="auto, auto" columns="*,*">
+    <Label text="Description" class="font-weight-bold" row="0" col="0" ></Label>
+    <TextField hint="Description" row="0" col="1"></TextField>
+    <StackLayout class="hr" row="1" colSpan="2"></StackLayout>
+</GridLayout>
+
+ 
+<TextField hint="Option 4" class="-border" ></TextField>
+
+ 
+<TextField hint="Rounded" class="-rounded m-t-10" ></TextField>
+
+ -->
+
+<Button text="Registrar" 
+class="-primary" 
+[isEnabled]="titleCtrl.valid && DescriptionCtrl.valid " 
+(tap)="onSubmit(titleCtrl.value, DescriptionCtrl.value)"></Button>
+
+</StackLayout >  
+
+</FlexboxLayout>

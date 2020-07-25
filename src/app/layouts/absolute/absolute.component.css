@@ -1,0 +1,22 @@
+ Label {
+     width: 50;
+     height: 50;
+ }
+ 
+ #L1 {
+     background: red;
+ }
+ 
+ #L2 {
+     background: blue;
+ }
+ 
+ #L3 {
+     background: orange;
+ }
+ 
+ AbsoluteLayout {
+     border-width: 5;
+     border-color: rebeccapurple;
+     height: 100%;
+ }

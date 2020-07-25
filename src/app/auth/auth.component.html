@@ -1,0 +1,52 @@
+
+<app-action-bar [title]="isLogin ? 'Login': 'Sign Up' "  [showBackButton]="false" [hasMenu]="false"></app-action-bar>
+<StackLayout  class="nt-form" [formGroup]="form">
+   
+
+    <StackLayout class="nt-input">
+        <Label text="Email" class="font-weight-bold m-b-5" [ngClass]="{ invalid: emailCtrlValid }"></Label>
+        <TextField 
+        hint="Email" 
+        required returnKeyType="next" 
+        keyboardType="email" 
+        [autocorrect]="false"
+        autocapitalizationType="none"
+        formControlName="email"
+        #emailEl
+        (returnPress)="onDone()"
+        ></TextField>
+        <Label *ngIf="!emailCtrlValid" text="please enter a valid email!"></Label>
+    </StackLayout>
+    <StackLayout class="nt-input" > 
+        <Label text="Password" class="font-weight-bold m-b-5"  [ngClass]="{ invalid: passwordCtrlValid}"></Label>
+        <TextField 
+        hint="Password" 
+        required returnKeyType="done" 
+        [autocorrect]="false"
+        autocapitalizationType="none"
+        [secure]="false"
+        formControlName="password"
+        #passwordEl
+        (returnPress)="onDone()"
+        ></TextField>
+        <Label *ngIf="!passwordCtrlValid" text="Must be 6+ characters long"></Label>
+    </StackLayout>
+
+
+    <Button 
+    [text]="isLogin ? 'Sign Up instead': 'Login instead' " 
+    class=" -outline -rounded-lg" 
+    (tap)="onSwith()" 
+     > </Button>
+
+    <Button 
+    [text]="isLogin ? 'Login': 'Sign Up' " 
+    class=" -primary -rounded-lg" 
+    (tap)="onSignIn()" 
+    [clearHistory]="true"
+    [isEnabled]="form.valid"
+    *ngIf="!isLoading"
+    > </Button>
+   <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+     
+</StackLayout>
