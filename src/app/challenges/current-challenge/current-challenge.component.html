@@ -54,8 +54,8 @@
         <Button text="Create new Challenge!" class="-primary"  nsRouterLink="/challenges/replace"  pageTransition="slideLeft" ></Button>
     </StackLayout>
     <StackLayout *ngIf="currentChallenge">
-    <Label class="h1 text-center" [text]="currentChallenge.title"></Label>
-    <Label class="body  text-center" [text]="currentChallenge.description"></Label>
+    <Label class="h1 text-center" [text]="currentChallenge.title" width="100%"></Label>
+    <Label class="body  text-center" [text]="currentChallenge.description" width="100%" ></Label>
     </StackLayout>
     
     <GridLayout rows="auto,*,*,*,*,*,*" columns="*,*,*,*,*,*,*" *ngIf="currentChallenge" >

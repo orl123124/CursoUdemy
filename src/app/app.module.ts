@@ -26,6 +26,7 @@ import { DayModalComponent } from "./challenges/day-modal/day-modal.component";
 import { SharedModule } from "./shared/ui/shared.module";
 import { ChallengeActionModule } from "./challenges/challenge-action/challenge-action.module";
 import { ReactiveFormsModule } from "@angular/forms";
+import { AuthModule } from "./auth/auth.module";
 
 @NgModule({
     bootstrap: [
@@ -34,12 +35,13 @@ import { ReactiveFormsModule } from "@angular/forms";
     imports: [
         NativeScriptModule,
         AppRoutingModule,
-        NativeScriptFormsModule,
-        ReactiveFormsModule,
+        // NativeScriptFormsModule,
+        // ReactiveFormsModule,
         NativeScriptUISideDrawerModule,
         SharedModule, // CONTIENE EL ActionBarComponent PARA EL LAZY LOADING ROUTING
         ChallengeActionModule,
         NativeScriptHttpClientModule,
+        AuthModule,
 
     ],
     declarations: [
@@ -50,7 +52,7 @@ import { ReactiveFormsModule } from "@angular/forms";
         FlexboxComponent,
         GridComponent,
         AbsoluteComponent,
-        AuthComponent,
+        // AuthComponent,
         // ActionBarComponent, // SE ELIMINA YA QUE ESTA COMPARTIDA X SHAREDMODULE
        
         DayModalComponent,

@@ -10,23 +10,28 @@ import { GridComponent } from "./layouts/grid/grid.component";
 import { AbsoluteComponent } from './layouts/absolute/absolute.component';
 import { AuthComponent } from './auth/auth.component';
 import { ActionBarComponent } from './shared/ui/action-bar/action-bar.component';
+import { AuthGuard } from "./auth/auth.guard";
  
 
 const routes: Routes = [
 
-    { path: "", component: AuthComponent },
-    { path: "app-auth", component: AuthComponent },
+    // { path: "", component: AuthComponent },
+    { 
+        path: "app-auth",  
+        loadChildren:'~/app/auth/auth.module#AuthModule' },
     {
         path:"challenges",
-        loadChildren:'~/app/challenges/challenges.module#ChallengesModule' 
-    }
-     
+        loadChildren:'~/app/challenges/challenges.module#ChallengesModule' ,
+        canLoad:[AuthGuard]
+    },
+    { path: "", redirectTo:'/challenges/tabs',pathMatch:'full' },
    
    
 ];
 
 @NgModule({
     imports: [NativeScriptRouterModule.forRoot(routes)],
-    exports: [NativeScriptRouterModule]
+    exports: [NativeScriptRouterModule],
+    providers:[AuthGuard]
 })
 export class AppRoutingModule { }

@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, tap } from 'rxjs/operators';
-import { throwError, BehaviorSubject } from 'rxjs';
+import { throwError, BehaviorSubject, of } from 'rxjs';
 import { User } from './user.model';
 import { RouterExtensions } from 'nativescript-angular/router';
+
+import { setString, getString, hasKey, remove } from 'tns-core-modules/application-settings';
+import { ChallengeService } from '../challenges/challenge.service';
 
 const FIREBASE_KEY ='AIzaSyBPdhSJAw49eD-BFYUMIByZnJGr29oHl_k';
 interface authRespondeData{
@@ -21,10 +24,12 @@ interface authRespondeData{
 export class AuthService {
 
     private _user = new BehaviorSubject<User>(null);
+    private tokenExpirationTimer: number;
 
     constructor(
         private http: HttpClient,
         private router: RouterExtensions,
+        // private challengeService: ChallengeService,
     ){
 
     }
@@ -33,9 +38,54 @@ export class AuthService {
         return this._user.asObservable();
     }
 
+    autoLogin(){
+        if(!hasKey('userdata')){
+            return of(false);
+        }
+
+        const userData:{
+              email: string;
+              id: string;
+              _token: string;
+              _tokeExpirationDate: string;
+        } = JSON.parse(getString('userdata'));
+
+        const loadUser = new User(
+            userData.email,
+            userData.id,
+            userData._token,
+            new Date(userData._tokeExpirationDate)
+        );
+
+        if(loadUser.isAuth){
+
+            this._user.next(loadUser);
+            this.autoLogOut(loadUser.timeToExpiry);
+            // SE INICA DESDE CHALLENGE VALIDADO CON GUARD
+            //this.router.navigate(['/challenges'],{ clearHistory: true })
+            return of(true);
+        }
+        return of(false);
+    }
+
+    autoLogOut(expDuration: number){
+console.log('autoLogOut-------->'+expDuration );
+        this.tokenExpirationTimer = setTimeout(() => this.logout(),expDuration);
+
+    }
+
     logout(){
         console.log('log out ---->');
         this._user.next(null);
+
+        remove('userdata');
+        if(this.tokenExpirationTimer){
+            console.log(' tokenExpirationTimer --->');
+            clearTimeout(this.tokenExpirationTimer);
+        }
+           
+        
+        // this.challengeService.cleanUP();
         this.router.navigate(['/app-auth'],{  clearHistory: true });
     }
 
@@ -85,15 +135,19 @@ export class AuthService {
 
     handleLogin(email: string, localId: string, idToken: string, expiresIn: number ){
        
-        const expDate = new Date(new Date().getTime()+ expiresIn * 1000 );
+        const expDate = new Date(new Date().getTime()+ expiresIn  * 1000 );
         const user = new User(
             email,
             localId,
             idToken,
             expDate );
         
+            setString('userdata',JSON.stringify(user));
+        this.autoLogOut(user.timeToExpiry);
         this._user.next(user);
-        
+        //save local storage
+
+
     }
 
     handleError(error: string){

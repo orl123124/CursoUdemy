@@ -8,6 +8,11 @@ export class User{
         private _tokeExpirationDate: Date
     ){}
 
+
+    get userId(){
+        return this.id;
+    }
+
     get isAuth(){
         return !!this.token;
     }
@@ -22,6 +27,15 @@ export class User{
         }
 
         return this._token;
+    }
+
+
+    get timeToExpiry(){
+        console.log('timeToExpiry()'+ ( new Date().getTime() ) );
+        console.log('timeToExpiry() .....'+  this._tokeExpirationDate.getTime()  );
+        
+        
+        return this._tokeExpirationDate.getTime() - new Date().getTime(); 
     }
 
     

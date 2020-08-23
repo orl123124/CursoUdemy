@@ -37,6 +37,8 @@ export class ActionBarComponent implements OnInit {
 
     ngOnInit(): void { }
 
+
+    
     onLoadedActionBar(){
         if(isAndroid && !this.hasMenu){
             console.log("====>>>>es un android.....");

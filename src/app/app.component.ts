@@ -36,6 +36,12 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
                 
             }
         );
+        //  YA NO SE NECESITA POR Q VA DIRECTO AL CHALLENGE Y VALIDA CON EL AUTHGUARD
+        /*
+        this.authService.autoLogin().subscribe(success =>{
+            console.log('autoLogin()--->'+ success);
+        });
+        */
     }
 
     ngOnDestroy(){
